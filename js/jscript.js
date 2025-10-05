@@ -1,18 +1,27 @@
-function getTheNumberInArray(){
+const dataArray=[12,57,4,96,29,71,45,38,62,19,88,6,24,70,91,11,33,52,2,99,31,67,43,9,60,15,76,40,21,94,1,27,35,17,85,48,7,55,13,36,30,92,26,79,66,98,3,59,20,83];
+		
 
-	const guessNumber=document.getElementById("guess").value;
-	let remarks;
+		function getTheNumberInArray(){
 
-	//the list arrays
-	const dataArray=[0,12,57,4,96,29,71,45,38,62,19,88,6,24,70,91,11,33,52,2,99,31,67,43,9,60,15,76,40,21,94,1,27,35,17,85,48,7,55,13,36,30,92,26,79,66,98,3,59,20,83];
+			const guessNumber=document.getElementById('searchInput');
+			const resultPar = document.getElementById('result');
+			const targetNum = parseInt(guessNumber.value);
+				
+			if(isNaN(targetNum)){
+				resultPar.textContent = "Please enter a valid number.";
+				return;
+			}
 
-
-	//find the index of the guess
-	const index = dataArray.indexOf(guessNumber);
-
-	if (index !== -1){
-		console.log('Congratulations! Your guess of ${guessNumber} was found in position ${index}');
-	} else{
-		console.log("Sorry, your guess of ${guessNumber} was not in the array");
-	}
-}
+			//check if number exist
+			if(dataArray.includes(targetNum)){
+				resultPar.textContent = `Congratulations! Your guess of ${targetNum} is found in the array.`;
+			} else{
+				resultPar.textContent = `Sorry, your guess of ${targetNum} is not found in the array.`;
+			}
+			
+			//getting the index
+			const index = dataArray.findIndex(num => num === targetNum);
+			if(index !== -1){
+				resultPar.textContent += `It is found at index: ${index}.`;
+			}
+		}
